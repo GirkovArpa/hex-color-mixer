@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<HTML>
+
+  <HEAD>
+    <TITLE>Hex Color Mixer</TITLE>
+  </HEAD>
+
+  <BODY>
+    <span>
+      <input type='color' id='color1' value='#3890b9' />&nbsp;+&nbsp;
+      <input type='color' id='color2' value='#f6ff00' />&nbsp;=&nbsp;
+      <input type='color' id='color3' value='#8cc46f' />
+    </span>
+  </BODY>
+  <script src="index.js"></script>
+  <SCRIPT>
+    const [color1, color2, color3] = [
+      document.getElementById('color1'),
+      document.getElementById('color2'),
+      document.getElementById('color3')
+    ];
+
+    [color1, color2].forEach(color => {
+      color.addEventListener('change', () => {
+        color3.value = mix_hex(color1.value, color2.value);
+      });
+    });
+  </SCRIPT>
+
+</HTML>

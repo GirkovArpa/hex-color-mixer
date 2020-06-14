@@ -1,6 +1,6 @@
 'use strict';
 
-console.log(mix_hex('#3890b9', '#f6ff00')); // #8cc46f
+console.log('#3890b9 + #f6ff00 =', mix_hex('#3890b9', '#f6ff00')); // #3890b9 + #f6ff00 = #8cc46f
 
 function hex2dec(hex) {
   return hex.replace('#', '').match(/.{2}/g).map(n => parseInt(n, 16));
