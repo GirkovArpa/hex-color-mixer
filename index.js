@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('#3890b9 + #f6ff00 =', mix_hex('#3890b9', '#f6ff00')); // #3890b9 + #f6ff00 = #8cc46f
+console.log(mix_hexes('#3890b9', '#f6ff00')); // #8cc46f
 
 function hex2dec(hex) {
   return hex.replace('#', '').match(/.{2}/g).map(n => parseInt(n, 16));
@@ -34,19 +34,20 @@ function cmyk2rgb(c, m, y, k) {
   return [r, g, b];
 }
 
-function mix_cmyk(cmyk1, cmyk2) {
-  let c = (cmyk1[0] + cmyk2[0]) / 2;
-  let m = (cmyk1[1] + cmyk2[1]) / 2;
-  let y = (cmyk1[2] + cmyk2[2]) / 2;
-  let k = (cmyk1[3] + cmyk2[3]) / 2;
+
+function mix_cmyks(...cmyks) {
+  let c = cmyks.map(cmyk => cmyk[0]).reduce((a, b) => a + b, 0) / cmyks.length;
+  let m = cmyks.map(cmyk => cmyk[1]).reduce((a, b) => a + b, 0) / cmyks.length;
+  let y = cmyks.map(cmyk => cmyk[2]).reduce((a, b) => a + b, 0) / cmyks.length;
+  let k = cmyks.map(cmyk => cmyk[3]).reduce((a, b) => a + b, 0) / cmyks.length;
   return [c, m, y, k];
 }
 
-function mix_hex(hex1, hex2) {
-  let [rgb1, rgb2] = [hex2dec(hex1), hex2dec(hex2)];
-  let [cmyk1, cmyk2] = [rgb2cmyk(...rgb1), rgb2cmyk(...rgb2)];
-  let mixture_cmyk = mix_cmyk(cmyk1, cmyk2);
+function mix_hexes(...hexes) {
+  let rgbs = hexes.map(hex => hex2dec(hex)); 
+  let cmyks = rgbs.map(rgb => rgb2cmyk(...rgb));
+  let mixture_cmyk = mix_cmyks(...cmyks);
   let mixture_rgb = cmyk2rgb(...mixture_cmyk);
   let mixture_hex = rgb2hex(...mixture_rgb);
   return mixture_hex;
-} 
+}

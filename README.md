@@ -2,6 +2,8 @@
 
 ![screenshot from imgur](https://i.imgur.com/vIGjYpN.png)
 
+The function `mix_hexes` accepts any number of colors.
+
 ```javascript
- mix_hex('#3890b9', '#f6ff00') // #8cc46f
+ console.log(mix_hexes('#3890b9', '#f6ff00')); // #8cc46f
  ```
