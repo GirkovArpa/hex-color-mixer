@@ -2,6 +2,18 @@
 
 console.log(mix_hexes('#3890b9', '#f6ff00')); // #8cc46f
 
+function mix_hexes_naive(...hexes) {
+  const rgbs = hexes.map(hex => hex2dec(hex));
+  const rgb = rgbs.reduce((acc, cur) => {
+    cur.forEach((e, i) => acc[i] = acc[i] ? acc[i] + e : e);
+    return acc;
+  }, []).map(e => e / rgbs.length);
+  const mixture = rgb2hex(...rgb);
+  return mixture;
+}
+
+console.log(mix_hexes_naive('#3890b9', '#f6ff00'));
+
 function hex2dec(hex) {
   return hex.replace('#', '').match(/.{2}/g).map(n => parseInt(n, 16));
 }
@@ -47,7 +59,7 @@ function mix_cmyks(...cmyks) {
 }
 
 function mix_hexes(...hexes) {
-  let rgbs = hexes.map(hex => hex2dec(hex)); 
+  let rgbs = hexes.map(hex => hex2dec(hex));
   let cmyks = rgbs.map(rgb => rgb2cmyk(...rgb));
   let mixture_cmyk = mix_cmyks(...cmyks);
   let mixture_rgb = cmyk2rgb(...mixture_cmyk);
