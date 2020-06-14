@@ -23,7 +23,7 @@ function rgb2hex(r, g, b) {
   r = Math.min(r, 255);
   g = Math.min(g, 255);
   b = Math.min(b, 255);
-  return '#' + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+  return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('');
 }
 
 function rgb2cmyk(r, g, b) {
