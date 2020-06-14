@@ -12,8 +12,6 @@ function mix_hexes_naive(...hexes) {
   return mixture;
 }
 
-console.log(mix_hexes_naive('#3890b9', '#f6ff00'));
-
 function hex2dec(hex) {
   return hex.replace('#', '').match(/.{2}/g).map(n => parseInt(n, 16));
 }
